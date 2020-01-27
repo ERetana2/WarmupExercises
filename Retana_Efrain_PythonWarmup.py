@@ -2,6 +2,7 @@
 """
 @author: Efrain Retana
 """
+import numpy as np
 # PROBLEM 1
 def divisible(a,b):
     # if b can divide a and have no remainder, then it is divisible
@@ -82,12 +83,21 @@ def sum_array(A):
 # PROBLEM 10
 def replace_array(A,x,y):
     # create a temporary array 
-    newArr = A
-    # iterate through array until it finds x in newArr, then replace this x with y
-    for i in range(len(newArr)):
-        if newArr[i] == x:
-            newArr[i] = y
-    return newArr
+#    newArr = A.copy()
+#    # iterate through array until it finds x in newArr, then replace this x with y
+#    for i in range(len(newArr)):
+#        if newArr[i] == x:
+#            newArr[i] = y
+#    return newArr
+    # create a numpy array  the assign all of its values to 0 ,
+    # then check the values of A and replace them in B
+    B = np.zeroes(len(A))
+    for i in range(len(A)):
+        if A[i] == x:
+            B[i] == y
+        else:
+            B[i] = A[i]
+    return B
 
 # PROBLEM 11
 def is_square(A):
@@ -220,6 +230,25 @@ def merge(L1,L2):
     while currNum < len(List):
         tempList.append(List[currNum])
         currNum += 1
+    # IN CLASS PROBLEM 22
+def mergeClass(L1,L2):
+    L = []
+    i = j = 0
+    for i in range(len(L1) + len(L2)):
+        if i == len(L1):
+            L = L + L2[j:]
+            break
+        elif j == len(L2):
+            L = L + L1[i:]
+            break
+        elif L1[i] < L2[j]:
+            L.append(L1[i])
+            i += 1
+        else:
+            L.append(L2[j])
+            j += 1
+    return L
+    
     
 # PROBLEM 22
 def splitPivot(L):
@@ -236,8 +265,9 @@ def splitPivot(L):
 
 
 # Test Methods
-arr = [1,2,3,4,5,6,7]
-print(greater_than_list(arr,4))
+arr = [1,2,7]
+secArr = [5,6,9]
+print(mergeClass(arr,secArr))
 
 
 
