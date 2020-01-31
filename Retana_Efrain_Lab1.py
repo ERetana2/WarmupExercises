@@ -91,13 +91,21 @@ def draw_branches(ax, n, p, xpos, ypos):#returns the drawing of branches
        draw_branches(ax, n-1, points[0], xpos/2, ypos)
        draw_branches(ax, n-1, points[2], xpos/2, ypos)
         
-def draw_trees(ax,n,p,deg,w):
-    ax.plot(p[:,0],p[:,1],linewidth=0.5,color='k') # Draw tree
-    p1 = np.array()
-    draw_trees()
-    
+def draw_trees(ax,n,p,deg,turn_angle,L):
+    if n>0:
+        ax.plot(p[:,0],p[:,1],linewidth=0.5,color='k') # Draw tree
+        L = L* 3/4
+        r_xPos = p[1][0] + L * math.cos(math.radians(deg))
+        r_yPos =p[1][1] + L * math.sin(math.radians(deg)) -deg
+        p1 = np.array([[p[1][0],p[1][1]],[r_xPos,r_yPos]])
         
-    
+        l_xPos = p[1][0] - L * math.cos(math.radians(deg))
+        l_yPos =p[1][1] - L * math.sin(math.radians(deg)) 
+        p2 = np.array([[p[1][0],p[1][1]],[l_xPos,l_yPos]])
+        
+        draw_trees(ax,n-1,p1, deg/1.5 ,turn_angle/1.6 ,L)
+        draw_trees(ax,n-1,p2,deg/1.5,turn_angle/1.6,L)
+        
 
 if __name__ == "__main__":  
     
@@ -171,7 +179,7 @@ if __name__ == "__main__":
 #    plt.show()
 #    fig.savefig('circlesc.png')
 #
-#    a = np.array([[0,0],[50,100],[100,0],[0,0]])
+    a = np.array([[0,0],[50,100],[100,0],[0,0]])
 #    fig, ax = plt.subplots() 
 #    draw_triangles(ax, 3, a)
 #    ax.set_aspect(1.0)
@@ -193,26 +201,26 @@ if __name__ == "__main__":
 #    plt.show()
 #    fig.savefig('trianglesc.png')
 #    
-#    fig, ax = plt.subplots() 
-#    draw_triangle_grid(ax, 2, a)
-#    ax.set_aspect(1.0)
-#    ax.axis('off')
-#    plt.show()
-#    fig.savefig('triangleGrida.png')
-#    
-#    fig, ax = plt.subplots() 
-#    draw_triangle_grid(ax, 3, a)
-#    ax.set_aspect(1.0)
-#    ax.axis('off')
-#    plt.show()
-#    fig.savefig('triangleGridb.png')
-#    
-#    fig, ax = plt.subplots() 
-#    draw_triangle_grid(ax, 4, a)
-#    ax.set_aspect(1.0)
-#    ax.axis('off')
-#    plt.show()
-#    fig.savefig('triangleGridc.png')
+    fig, ax = plt.subplots() 
+    draw_triangle_grid(ax, 2, a)
+    ax.set_aspect(1.0)
+    ax.axis('off')
+    plt.show()
+    fig.savefig('triangleGrida.png')
+    
+    fig, ax = plt.subplots() 
+    draw_triangle_grid(ax, 3, a)
+    ax.set_aspect(1.0)
+    ax.axis('off')
+    plt.show()
+    fig.savefig('triangleGridb.png')
+    
+    fig, ax = plt.subplots() 
+    draw_triangle_grid(ax, 4, a)
+    ax.set_aspect(1.0)
+    ax.axis('off')
+    plt.show()
+    fig.savefig('triangleGridc.png')
 # 
 #    squares = np.array([[0,0],[0,100],[100,100],[100,0],[0,0]])
 #    fig, ax = plt.subplots() 
@@ -259,9 +267,9 @@ if __name__ == "__main__":
 #    plt.show()
 #    fig.savefig('branchesc.png')
     
-    trees = np.array([[0,0],[0,50],[-25,75],[0,50],[25,75]])
+    trees = np.array([[0,0],[0,100]])
     fig, ax = plt.subplots() 
-    draw_trees(ax, 1, trees, 100)
+    draw_trees(ax, 5, trees,45,45,100)
     ax.set_aspect(1.0)
     ax.axis('off')
     plt.show()
