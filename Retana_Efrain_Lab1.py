@@ -1,6 +1,6 @@
 """
 @Title : Lab 1
-@Professor: Olac Fuentes
+@Professor: Olac Fu8entes
 @TA: Oscar Galindo
 @author: Efrain Retana
 """
